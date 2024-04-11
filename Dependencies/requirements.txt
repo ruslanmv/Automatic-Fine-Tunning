@@ -6,4 +6,3 @@ trl
 datasets==2.16.0
 sentencepiece
 protobuf
-datasets==2.16.0
