@@ -1,0 +1,8 @@
+bitsandbytes
+transformers==4.36.2 
+peft 
+accelerate
+trl 
+datasets==2.16.0
+sentencepiece
+protobuf
