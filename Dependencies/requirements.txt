@@ -6,3 +6,5 @@ trl
 datasets==2.16.0
 sentencepiece
 protobuf
+openai 
+typing_extensions
