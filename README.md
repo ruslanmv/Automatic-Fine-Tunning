@@ -25,7 +25,7 @@ Depending of the number of tokens to be trained  we should choose the appropriat
 | Instance Name   | Training Time (estimate) | Memory | Max Inference size (#params) | Max training size (#tokens) | Dataset Medical | Current Step at 2:50min | Speed (it/s) | Time Left |
 | --------------- | ------------------------ | ------ | ---------------------------- | --------------------------- | --------------- | ----------------------- | ------------ | --------- |
 | ml.g4dn.xlarge  | Slow                     | 16 GB  | 7B                           | 1B                          | 250k            | 17                      | 0.09         | 201:17:03 |
-| ml.p3.2xlarge   | Moderate                 | 61 GB  | 7B                           | 1B                          | 250k            | -                       | -            | -         |
+| ml.p3.2xlarge   | Moderate                 | 61 GB  | 7B                           | 1B                          | 250k            | 61                      | 0.34         | 52:13:07  |
 | ml.p4d.8xlarge  | Moderate                 | 64 GB  | 7B                           | 1B                          | 250k            | -                       | -            | -         |
 | ml.p3.8xlarge   | Fast                     | 128 GB | 14B                          | 2B                          | 250k            | 60                      | 0.34         | 52:12:43  |
 | ml.p4d.16xlarge | Fast                     | 128 GB | 14B                          | 2B                          | 250k            | -                       | -            | -         |
@@ -101,82 +101,6 @@ In the step 8 we are going to download the model
 
 
 
-
-
-
-I'd be glad to help you improve the performance of your Mistral-7B-Instruct-v0.2 fine-tuning on an AWS ml.p3.8xlarge instance and address the warnings you're encountering.
-
-**Addressing Warnings:**
-
-1. **`max_seq_length` Warning:**
-
-   - **Solution:** Explicitly set `max_seq_length` in your `SFTTrainer` initialization. This value depends on your dataset and GPU memory limitations. A common starting point for ml.p3.8xlarge is 1024, but adjust it based on your training data and memory usage. Here's the updated code:
-
-   Python
-
-   ```
-   trainer = SFTTrainer(
-       model=model,
-       train_dataset=dataset,
-       peft_config=peft_config,
-       max_seq_length=1024,  # Adjust as needed
-       dataset_text_field="text",
-       tokenizer=tokenizer,
-       args=training_arguments,
-       packing=False,
-   )
-   ```
-
-   Use code [with caution.](https://gemini.google.com/faq#coding)
-
-   content_copy
-
-2. **`Accelerator` Argument Deprecation:**
-
-   - **Solution:** The `Accelerator` library is being updated, so you'll need to use the new `accelerate.DataLoaderConfiguration` instead of the deprecated arguments. Here's the revised code snippet:
-
-   Python
-
-   ```
-   from accelerate import DataLoaderConfiguration
-   
-   dataloader_config = DataLoaderConfiguration(dispatch_batches=None, split_batches=False)
-   
-   # ... rest of your code ...
-   ```
-
-   Use code [with caution.](https://gemini.google.com/faq#coding)
-
-   content_copy
-
-3. **`LlamaTokenizerFast` Usage:**
-
-   - **Solution:** The warning suggests using the `tokenizer.__call__()` method for faster encoding with `LlamaTokenizerFast`. Experiment with this approach to see if it improves speed. Here's the potential modification:
-
-   Python
-
-   ```
-   # Consider using tokenizer.__call__() for faster encoding
-   encoded_data = tokenizer(data["text"], padding="max_length", truncation=True)
-   ```
-
-   Use code [with caution.](https://gemini.google.com/faq#coding)
-
-   content_copy
-
-4. **`torch.utils.checkpoint` Warning:**
-
-   - **Solution:** Explicitly set `use_reentrant` to `True` or `False` in your `model.gradient_checkpointing_enable()` call. Choose `True` if you want reentrant behavior, or `False` otherwise. Here's the adjusted code:
-
-   Python
-
-   ```
-   model.gradient_checkpointing_enable(use_reentrant=True)  # Or use_reentrant=False
-   ```
-
-   Use code [with caution.](https://gemini.google.com/faq#coding)
-
-   content_copy
 
 **Performance Improvement Strategies:**
 
