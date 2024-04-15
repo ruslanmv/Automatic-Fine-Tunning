@@ -119,82 +119,10 @@ By addressing the warnings, exploring the optimization strategies, and fine-tuni
 
 ## How to run the Notebook in the Background
 
-**Method 1: Detaching the Kernel**
-
-This method focuses on stopping the execution of code within the Jupyter notebook itself but allows background processes like training to continue.
-
-To run a Jupyter notebook on AWS SageMaker without ending the session when closing your personal computer and later restore the session to check progress, follow these steps:
-
-**Steps to initialize the run process:**
-
-1. Open your `FineTune.ipynb` notebook in Jupyter Lab within SageMaker.
-2. Run the notebook by clicking the "Run" button or using the "Shift + Enter" keyboard shortcut to execute each cell one by one, that initiate the model fine-tuning process.
-
-1. Detach the kernel to allow the background processes, such as model training, to continue running after closing your personal computer:
-
-   a. Navigate to the Cell menu in the top toolbar.
-
-   b. Select Kernel -> Shut Down Kernel. This action stops the current kernel execution but allows the background processes to continue running.
-
-2. Close your personal computer. The training process will continue running in the background within SageMaker.
-
-3. When you want to check the progress of your notebook:
-
-   a. Open your personal computer and log in to your AWS SageMaker account.
-
-   b. Navigate to the Jupyter Lab environment and open your finetune.ipynb notebook.
-
-   c. Reconnect to the kernel by navigating to the Cell menu in the top toolbar and selecting Kernel -> Connect to Kernel.
-
-4. You should now be able to see the progress of your notebook and interact with it as needed.
-
-Note: Implement checkpointing mechanisms within your finetune.ipynb code to save the model's state periodically. This allows you to resume training from the latest checkpoint if necessary. For more robust and scalable background execution, consider using SageMaker Processing Jobs for future runs.
-
-**Method 2: Using the Terminal (Optional)**
-
-This method leverages the `screen` command to create a detached session where your training can run independent of your terminal window.
-
-**Steps to initialize the run process:**
-
-1. Open your `finetune.ipynb` notebook and run the code that starts the training process.
-
-**Steps to close your computer:**
-
-1. Open a terminal window within your SageMaker notebook instance (usually from the top bar or "New" menu).
-2. Run the command:
-
-Bash
-
-```
-screen -d -S my_session bash  # Replace 'my_session' with a desired name
-```
-
-**Reconnecting to a Detached Session (Optional)**
-
-If you need to monitor progress later:
-
-Bash
-
-```
-screen -r my_session  # Replace 'my_session' with the actual name you used
-```
-
-**Additional Tips:**
-
-- **Checkpoint Your Training:**  Incorporate code to save the model state periodically. This allows resuming training from the latest checkpoint if needed.
-- **SageMaker Processing Jobs (Consider This for Future Runs):** Explore Processing Jobs for a more robust and scalable approach. They manage the training lifecycle, freeing you from manual detachment.
-
-**Waking Up and Checking Progress:**
-
-1. Open a new terminal window in your SageMaker instance (if using Method 1) or reconnect to the detached session using `screen -r my_session` (if using Method 2).
-2. Within the terminal or Jupyter notebook, you can monitor logs or access the model files to see training progress.
-
-**Method 3: SageMaker Processing Jobs  (Optional)**
-
+**SageMaker Processing Jobs(Optional)**
 If are interested to run this notebook in background without be on the noteobok, we can use SageMaker Processing Jobs 
 
 This is the preferred approach as it's fully managed by SageMaker, providing scalability, monitoring, and logging capabilities.
-
 1. **Convert Notebook to Script (Optional):**
    - For complex notebooks with extensive dependencies or interactivity, consider converting them to a well-structured Python script (`fine_tuning.py`). This simplifies the execution process.
 2. **Create a Processing Job:**
