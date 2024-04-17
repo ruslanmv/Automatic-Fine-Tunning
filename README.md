@@ -30,7 +30,7 @@ Depending of the number of tokens to be trained  we should choose the appropriat
 | ml.p3.8xlarge   | Fast                     | 128 GB | 14B                          | 2B                          | 250k            | 60                      | 0.34         | 52:12:43  |
 | ml.p4d.16xlarge | Fast                     | 128 GB | 14B                          | 2B                          | 250k            | -                       | -            | -         |
 | ml.p3.16xlarge  | Very Fast                | 640 GB | 18B                          | 2.5B                        | 250k            | -                       | -            | -         |
-| ml.p4d.24xlarge | Very Fast                | 320 GB | 32B                          | 5B                          | 250k            | -                       | 0.45            | 39:06:37         |
+| ml.p4d.24xlarge | Very Fast                | 320 GB | 32B                          | 5B                          | 250k            | 80                       | 0.45            | 39:06:37         |
 
 
 
