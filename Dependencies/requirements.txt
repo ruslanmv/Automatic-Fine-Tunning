@@ -7,7 +7,7 @@ peft
 trl 
 datasets==2.16.0 
 sentencepiece 
-protobuf==3.12
+protobuf>=3.12,<5.0
 ipython
 #openai 
 #typing_extensions
