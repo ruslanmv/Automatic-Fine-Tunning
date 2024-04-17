@@ -30,7 +30,9 @@ Depending of the number of tokens to be trained  we should choose the appropriat
 | ml.p3.8xlarge   | Fast                     | 128 GB | 14B                          | 2B                          | 250k            | 60                      | 0.34         | 52:12:43  |
 | ml.p4d.16xlarge | Fast                     | 128 GB | 14B                          | 2B                          | 250k            | -                       | -            | -         |
 | ml.p3.16xlarge  | Very Fast                | 640 GB | 18B                          | 2.5B                        | 250k            | -                       | -            | -         |
-| ml.p4d.24xlarge | Very Fast                | 320 GB | 32B                          | 5B                          | 250k            | -                       | -            | -         |
+| ml.p4d.24xlarge | Very Fast                | 320 GB | 32B                          | 5B                          | 250k            | -                       | 0.45            | 39:06:37         |
+
+
 
 **Note:**
 
@@ -118,48 +120,7 @@ In the step 8 we are going to download the model
 By addressing the warnings, exploring the optimization strategies, and fine-tuning your hyperparameters, you should be able to improve the performance of your Mistral-7B-Instruct-v0.2 fine-tuning process.
 
 ## How to run the Notebook in the Background
-If are interested to run this notebook in background without be on the notebook, we can use SageMaker Processing Jobs  or using the CLI
-
-There are different method to run the notebook in the background.
-
-### Method 1 - SageMaker Processing Jobs
-
-
-This is the preferred approach as it's fully managed by SageMaker, providing scalability, monitoring, and logging capabilities.
-1. **Convert Notebook to Script:**
- - For complex notebooks with extensive dependencies or interactivity, consider converting them to a well-structured Python script (`FineTune.py`).
-- Open the Jupyter Notebook file in a browser, click File > Download as > Python (.py). 
-
-2. **Create a Processing Job:**
-   - Go to the SageMaker console and navigate to **Processing**.
-   - Click **Create processing job**.
-   - Provide a name (e.g., "FineTuning").
-   - Under **Appplication image configuration**, choose **Bring your own** and specify a Docker image containing your Python environment and dependencies. 
-   If you don't have one, you can create a simple image using `Dockerfile` and build it using `docker build`.
-   - Under **Processing script or notebook**, choose **Script file** if you converted your notebook, or **File** if it remains a notebook. Select the appropriate file from S3 or upload it.
-   - Configure other job parameters (e.g., instance type, role, output location) as needed. Notably:
-     - Set **Instance type** to `ml.p3.2xlarge`.
-     - Under **Role**, choose a role with permissions to access S3 buckets containing your notebook and output data.
-3. **Submit the Job:**
-   - Review the configuration and click **Create**.
-
-
-### Method 2 - Using CLI
-```
-pip install ipython
-```
-If we use runipy and have it installed, to run a jupyter notebook we can type:
-```
-runipy FineTune.ipynb
-```
-If we use nbconvert and have it installed, to run a jupyter notebook we can type:
-```
-jupyter nbconvert --to notebook --execute FineTune.ipynb
-```
-There are several other configuration options, such as timeout, report generation, 
-and output files generation which can be found in these two sites, for runipy and nbconvert respectively.
-
-To keep this command running in a remote server even when we disconnect from the remote server, 
-we can configure screen or tmux and run the Jupyter’s command inside either one of them.
+If are interested to run this notebook in background without be on the notebook, we can use SageMaker Processing Jobs  or using the CLI.
+For more information [here](./container/README.md)
 
 
