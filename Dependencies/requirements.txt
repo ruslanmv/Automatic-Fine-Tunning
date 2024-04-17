@@ -1,10 +1,13 @@
-bitsandbytes
 transformers==4.36.2 
-peft 
 accelerate==0.25.0 
+duckduckgo_search==4.1.0  
+python-dotenv
+bitsandbytes 
+peft 
 trl 
-datasets==2.16.0
-sentencepiece
+datasets==2.16.0 
+sentencepiece 
 protobuf
+ipython
 #openai 
 #typing_extensions
