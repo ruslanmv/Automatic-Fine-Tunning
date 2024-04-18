@@ -10,12 +10,12 @@ In this project we are going to use **SageMaker,** in particular we are going to
 
 | Instance Name   | GPU Type    | Number of GPUs | Memory | Virtual CPU | Price (estimate) |
 | --------------- | ----------- | -------------- | ------ | ----------- | ---------------- |
-| ml.g4dn.xlarge  | NVIDIA V100 | 1              | 16 GB  | 4           | Low              |
-| ml.p3.2xlarge   | NVIDIA V100 | 1              | 61 GB  | 8           | Low              |
+| ml.g4dn.xlarge  | NVIDIA V100 | 1 (16 GB each) | 16 GB  | 4           | Low              |
+| ml.p3.2xlarge   | NVIDIA V100 | 1 (16 GB each) | 61 GB  | 8           | Low              |
 | ml.p4d.8xlarge  | NVIDIA V100 | 2 (32 GB each) | 64 GB  | 32          | Medium           |
 | ml.p3.8xlarge   | NVIDIA V100 | 4 (32 GB each) | 128 GB | 32          | Medium           |
-| ml.p4d.16xlarge | NVIDIA V100 | 4              | 128 GB | 64          | High             |
-| ml.p3.16xlarge  | NVIDIA V100 | 8              | 640 GB | 64          | Very High        |
+| ml.p4d.16xlarge | NVIDIA V100 | 4 (32 GB each) | 128 GB | 64          | High             |
+| ml.p3.16xlarge  | NVIDIA V100 | 8 (32 GB each) | 640 GB | 64          | Very High        |
 | ml.p4d.24xlarge | NVIDIA A100 | 8 (40 GB each) | 320 GB | 96          | High             |
 
 Depending of the number of tokens to be trained  we should choose the appropriate instance, for example  for 250k records  for finetune with Mixtral-8x7B we have the following estimation:
