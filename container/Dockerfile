@@ -21,7 +21,7 @@ RUN pip3 install notebook
 RUN pip3 install pandas numpy matplotlib scikit-learn  # Replace with your processing libraries
 
 # Copy your Jupyter Notebook
-COPY FineTune.ipynb /app/FineTune.ipynb
+COPY FineTuneHF.ipynb /app/FineTuneHF.ipynb
 
 # Set the notebook as the entrypoint for the container
 ENTRYPOINT ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--allow-root", "--NotebookApp.token="]
